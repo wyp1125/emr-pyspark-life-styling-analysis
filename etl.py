@@ -15,11 +15,10 @@ lifefields_ls=lifefields.rdd.flatMap(lambda x: x).collect()
 col2type=dict(ncdata.dtypes)
 lifefields_set=set(lifefields_ls)
 n=len(allfields)
-sel_fields=list()
+sel_fields=["eid","31x0x0","21000x0x0","21022x0x0","21001x0x0"]
 for i in range(n):
     if allfields[i].split("x")[0] in lifefields_set:
         if col2type[allfields[i]] in ["int","double"]:
             sel_fields.append(allfields[i])
 print(len(lifefields_set))
 life_data=ncdata.select(sel_fields)
-clin_data=ncdata.select(["31x0x0","21000x0x0","21022x0x0","21001x0x0"])
