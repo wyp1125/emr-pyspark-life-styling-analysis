@@ -39,3 +39,7 @@ print("Number of total variables:"+str(n_v))
 print("Number of removed variables:"+str(rm_v))
 to_drop = [k for k, v in null_counts.items() if v > cut_ratio*m]
 life_data_1 = life_data.drop(*to_drop)
+
+life_data_2=life_data_1.na.drop("any")
+m_1=life_data_2.count()
+print(m_1)
