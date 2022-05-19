@@ -22,3 +22,7 @@ for i in range(n):
             sel_fields.append(allfields[i])
 print(len(lifefields_set))
 life_data=ncdata.select(sel_fields)
+from pyspark.sql.functions import col,isnan, when, count
+nullstat=ncdata.select([count(when(col(c).isNull(), c)).alias(c) for c in ncdata.columns])
+pandasDF = nullstat.toPandas()
+print(pandasDF)
