@@ -43,3 +43,24 @@ life_data_1 = life_data.drop(*to_drop)
 life_data_2=life_data_1.na.drop("any")
 m_1=life_data_2.count()
 print(m_1)
+
+from pyspark.ml.feature import VectorAssembler, StandardScaler, PCA
+assembler = VectorAssembler(inputCols = life_data_2.columns[5:], outputCol = 'features')
+life_data_3 = assembler.transform(life_data_2).select('features')
+
+scaler = StandardScaler(
+    inputCol = 'features', 
+    outputCol = 'scaledFeatures',
+    withMean = True,
+    withStd = True
+).fit(life_data_3)
+life_data_4 = scaler.transform(life_data_3)
+
+n_components = 3
+pca = PCA(
+    k = n_components, 
+    inputCol = 'scaledFeatures', 
+    outputCol = 'pcaFeatures'
+).fit(life_data_4)
+df_pca = pca.transform(life_data_4)
+print('Explained Variance Ratio', pca.explainedVariance.toArray())
