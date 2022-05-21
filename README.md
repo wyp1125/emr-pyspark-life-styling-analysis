@@ -1,6 +1,6 @@
 # emr-pyspark-life-styling-analysis
 
-PCA and linear regression analyses for a large dataset using PySpark on AWS EMR
+<h1>PCA and linear regression analyses for a large dataset using PySpark on AWS EMR</hr>
 
 Yupeng Wang, Ph.D.
 
