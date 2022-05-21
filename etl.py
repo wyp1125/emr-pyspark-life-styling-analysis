@@ -46,7 +46,9 @@ print(m_1)
 
 from pyspark.ml.feature import VectorAssembler, StandardScaler, PCA
 assembler = VectorAssembler(inputCols = life_data_2.columns[5:], outputCol = 'features')
-life_data_3 = assembler.transform(life_data_2).select('features')
+life_data_3 = assembler.transform(life_data_2).select(['eid','31x0x0','21000x0x0','21022x0x0','21001x0x0','features'])
+
+life_data_3.show(2)
 
 scaler = StandardScaler(
     inputCol = 'features', 
@@ -54,7 +56,9 @@ scaler = StandardScaler(
     withMean = True,
     withStd = True
 ).fit(life_data_3)
+
 life_data_4 = scaler.transform(life_data_3)
+life_data_4.show(2)
 
 n_components = 3
 pca = PCA(
@@ -62,5 +66,17 @@ pca = PCA(
     inputCol = 'scaledFeatures', 
     outputCol = 'pcaFeatures'
 ).fit(life_data_4)
-df_pca = pca.transform(life_data_4)
+
+life_data_5 = pca.transform(life_data_4)
 print('Explained Variance Ratio', pca.explainedVariance.toArray())
+
+life_data_5.show(2)
+
+from pyspark.ml.regression import LinearRegression
+lr=LinearRegression(featuresCol='pcaFeatures', labelCol='21001x0x0',regParam=0.3, elasticNetParam=0.8)
+lr_model = lr.fit(life_data_5)
+print("Coefficients: " + str(lr_model.coefficients))
+print("Intercept: " + str(lr_model.intercept))
+print("MSE: ", lr_model.summary.meanSquaredError)
+print("MAE: ", lr_model.summary.meanAbsoluteError)
+print("R-squared: ", lr_model.summary.r2)
