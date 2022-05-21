@@ -11,10 +11,10 @@ This demo describes the PySpark analysis part in one of my consulting projects. 
 
 <h3>Input files</h3>
 
-•	ukb49672.csv: contains health information of 14,939 variables (columns) for 502,415 participants. 
+•	ukb49672.csv: contains health information of 14,939 variables (columns) for 502,415 participants. </br>
 •	lifestyling.csv: contains a list of 461 life styling variables to focus on
 
 <h3>Challenges and solutions</h3>
-•	The number of analyzed variables was huge. PCA analysis was adopted to reduce the dimensionality of the dataset.
-•	List of life styling variables were not exact matches of column names of the main dataset. In addition, column names contain “-” and “.”. Thus, processing of column names was performed.
+•	The number of analyzed variables was huge. PCA analysis was adopted to reduce the dimensionality of the dataset. </br>
+•	List of life styling variables were not exact matches of column names of the main dataset. In addition, column names contain “-” and “.”. Thus, processing of column names was performed. </br>
 •	Variables had different proportions of missing values. Variables with high proportions of missing values were first filtered out. Then, NA rows were removed.
