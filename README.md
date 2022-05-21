@@ -2,8 +2,8 @@
 
 <h2>PCA and linear regression analyses for a large dataset using PySpark on AWS EMR</h2>
 
-<h3>Yupeng Wang, Ph.D.</h3>
-Data science consultant
+<h3>Yupeng Wang, Ph.D.
+Data science consultant</h3>
 
 Project summary
 
